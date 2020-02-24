@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xs:complexType name="ImportSession">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="Batches" />
+    </xs:sequence>
+    <xs:attribute name="UserID" type="xs:anySimpleType" />
+    <xs:attribute name="Password" type="xs:anySimpleType" />
+    <xs:attribute default="1" name="DeleteBatchOnError">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="0" />
+          <xs:enumeration value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute default="c:\ACXMLAIL.txt" name="LogFileName" type="xs:anySimpleType" />
+    <xs:attribute name="LastErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="LastErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="ImportSession" type="ImportSession" />
+  <xs:complexType name="Batches">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Batch" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Batches" type="Batches" />
+  <xs:complexType name="Batch">
+    <xs:all>
+      <xs:element minOccurs="0" ref="BatchFields" />
+      <xs:element minOccurs="0" ref="ExpectedBatchTotals" />
+      <xs:element minOccurs="0" ref="Folders" />
+      <xs:element minOccurs="0" ref="Documents" />
+      <xs:element minOccurs="0" ref="Pages" />
+    </xs:all>
+    <xs:attribute default="" name="Name" type="xs:anySimpleType" />
+    <xs:attribute name="BatchClassName" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="Description" type="xs:anySimpleType" />
+    <xs:attribute default="5" name="Priority">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="7" />
+          <xs:enumeration value="8" />
+          <xs:enumeration value="9" />
+          <xs:enumeration value="1" />
+          <xs:enumeration value="2" />
+          <xs:enumeration value="10" />
+          <xs:enumeration value="3" />
+          <xs:enumeration value="4" />
+          <xs:enumeration value="5" />
+          <xs:enumeration value="6" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute default="0" name="EnableAutomaticSeparationAndFormID">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="0" />
+          <xs:enumeration value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute default="0" name="EnableSingleDocProcessing">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="0" />
+          <xs:enumeration value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute default="0" name="Processed">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="0" />
+          <xs:enumeration value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RelativeImageFilePath" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="Batch" type="Batch" />
+  <xs:complexType name="BatchFields">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="BatchField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BatchFields" type="BatchFields" />
+  <xs:complexType name="BatchField">
+    <xs:attribute name="Name" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="Value" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="BatchField" type="BatchField" />
+  <xs:complexType name="ExpectedBatchTotals">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="ExpectedBatchTotal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExpectedBatchTotals" type="ExpectedBatchTotals" />
+  <xs:complexType name="ExpectedBatchTotal">
+    <xs:attribute name="Name" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="Value" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="ExpectedBatchTotal" type="ExpectedBatchTotal" />
+  <xs:complexType name="Folders">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Folder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Folders" type="Folders" />
+  <xs:complexType name="Folder">
+    <xs:all>
+      <xs:element minOccurs="0" ref="IndexFields" />
+      <xs:element minOccurs="0" ref="Documents" />
+      <xs:element minOccurs="0" ref="Folders" />
+    </xs:all>
+    <xs:attribute name="FolderClassName" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="Folder" type="Folder" />
+  <xs:complexType name="Documents">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Document" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Documents" type="Documents" />
+  <xs:complexType name="Document">
+    <xs:all>
+      <xs:element minOccurs="0" ref="IndexFields" />
+      <xs:element minOccurs="0" ref="Pages" />
+      <xs:element minOccurs="0" ref="Tables" />
+    </xs:all>
+    <xs:attribute name="FormTypeName" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="Document" type="Document" />
+  <xs:complexType name="IndexFields">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="IndexField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IndexFields" type="IndexFields" />
+  <xs:complexType name="IndexField">
+    <xs:attribute name="Name" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="Value" type="xs:anySimpleType" use="required" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="IndexField" type="IndexField" />
+  <xs:complexType name="Pages">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Page" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Pages" type="Pages" />
+  <xs:complexType name="Page">
+    <xs:attribute name="ImportFileName" type="xs:anySimpleType" use="required" />
+    <xs:attribute default="" name="OriginalFileName" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType">
+      <xs:annotation>
+        <xs:documentation>will be ignored</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType">
+      <xs:annotation>
+        <xs:documentation>will be ingored</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ContentDisposition">
+      <xs:annotation>
+        <xs:documentation>will be ignored</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="Page" type="Page" />
+  <xs:complexType name="Tables">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Table" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tables" type="Tables" />
+  <xs:complexType name="Table">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="TableRows" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="Table" type="Table" />
+  <xs:complexType name="TableRows">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="TableRow" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableRows" type="TableRows" />
+  <xs:complexType name="TableRow">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="IndexFields" />
+    </xs:sequence>
+    <xs:attribute name="ErrorCode" type="xs:anySimpleType" />
+    <xs:attribute name="ErrorMessage" type="xs:anySimpleType" />
+  </xs:complexType>
+  <xs:element name="TableRow" type="TableRow" />
+</xs:schema>
